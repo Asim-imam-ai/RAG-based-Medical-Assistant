@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from auth.routes import router as auth_routher
 from docs.routes import router as docs_routher
-
+from chat.routes import router as chat_routher
 
 # 1. Initialize once
 app = FastAPI()
@@ -9,6 +9,7 @@ app = FastAPI()
 # 2. Include your external routes
 app.include_router(auth_routher)
 app.include_router(docs_routher)
+app.include_router(chat_routher)
 
 # 3. Add any local routes to the SAME 'app' instance
 @app.get("/")
