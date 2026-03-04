@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from auth.routes import router as auth_routher
 from docs.routes import router as docs_routher
 from chat.routes import router as chat_routher
+from fastapi.middleware.cors import CORSMiddleware
 
 # 1. Initialize once
-app = FastAPI()
+app = FastAPI(title="Medical Assistant API")
 
 # 2. Include your external routes
 app.include_router(auth_routher)
@@ -15,3 +16,12 @@ app.include_router(chat_routher)
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://your-streamlit-app.streamlit.app"], # Your frontend URL
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
