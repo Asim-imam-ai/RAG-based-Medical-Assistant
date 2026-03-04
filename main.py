@@ -1,6 +1,16 @@
-def main():
-    print("Hello from medial-assisstant!")
+from fastapi import FastAPI
+from auth.routes import router as auth_routher
+from docs.routes import router as docs_routher
 
 
-if __name__ == "__main__":
-    main()
+# 1. Initialize once
+app = FastAPI()
+
+# 2. Include your external routes
+app.include_router(auth_routher)
+app.include_router(docs_routher)
+
+# 3. Add any local routes to the SAME 'app' instance
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
