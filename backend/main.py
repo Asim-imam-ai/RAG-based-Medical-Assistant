@@ -16,12 +16,3 @@ app.include_router(chat_routher)
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://your-streamlit-app.streamlit.app"], # Your frontend URL
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
